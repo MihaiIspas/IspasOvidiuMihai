@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<center>
+
+<h1><font size="20" color="blue">Festival Tickets Shop</font></h1>
+<h1>Log In</h1>
+
+<form action="#" th:action="@{/login}" th:object="${userDTO}" method="post" >
+    <p><input type="text" th:field="${userDTO.userName}" placeholder="User name" /></p>
+    <p><input type="password" th:field="${userDTO.password}" placeholder="Password" /></p>
+    <p><input type="submit" name="loginbtn" value="Log In" /></p>
+</form>
+
+<h3 th:if="${state} != null" th:text="${state}">Login State</h3>
+
+</center>
+
+</body>
+</html>

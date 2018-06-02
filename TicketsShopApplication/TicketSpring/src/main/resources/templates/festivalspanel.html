@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Festivals</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        th {
+            text-align: left;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+	<p align="center"><font size="20" color="red">Festivals</font></p>
+	<form action="#" th:action="@{'/festivals/userID/' + ${user.ID}}" th:object="${sum}" method="post" >
+    	<p><input type="text" th:field="${sum.account}" placeholder="Account" /></p>
+    	<p><input type="submit" name="depositbtn" value="Deposit" /></p>
+   		<p><input type="submit" name="withdrawbtn" value="Withdraw" /></p>
+	</form>
+	<p align="right"><font size="4">User name :<td th:text="${user.userName}">User name</td></font></p>
+	<p align="left"><font size="4">Account :<td th:text="${user.account}">Account</td></font></p>
+	
+	<form align="center" action="#" th:action="@{'/festivals/userID/' + ${user.ID}}" th:object="${search}" method="post" >
+    	<p><input type="text" th:field="${search.name}" placeholder="Search" /></p>
+    	<p><input type="submit" name="searchbtn" value="Search" /></p>
+	</form>
+
+   <table style="width:80%" align="center">
+    <td>Name</td>
+    <td>Genre</td>
+    <td>Description</td>
+    <td>Select</td>
+    <tr th:each="festival : ${allFestivals}">
+        <td th:text="${festival.name}">Name</td>
+        <td th:text="${festival.genre}">Genre</td>
+        <td th:text="${festival.description}">Description</td>
+        <td>
+        <form action="#" data-th-action="@{'/festivals/userID/' + ${user.ID}}" method="post">
+        	<input type="hidden" name="id" th:value="${festival.ID}"/>
+        	<button type="submit" name="selectfestivalbtn" value="Select">Select</button>
+        </form>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

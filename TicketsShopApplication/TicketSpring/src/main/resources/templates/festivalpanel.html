@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        th {
+            text-align: left;
+        }
+
+
+    </style>
+</head>
+
+<body>
+   <p align="center"><font size="20" color="red"> <span th:text="${name}"></span></font></p>
+   <form action="#" th:action="@{'/festivals/userID/' + ${user.ID} + '/festivalID/' + ${festivalID}}" th:object="${sum}" method="post" >
+    	<p><input type="text" th:field="${sum.account}" placeholder="Account" /></p>
+    	<p><input type="submit" name="depositbtn" value="Deposit" /></p>
+   		<p><input type="submit" name="withdrawbtn" value="Withdraw" /></p>
+	</form>
+   <p align="right"><font size="4">User name :<td th:text="${user.userName}">User name</td></font></p>
+   <p align="left"><font size="4">Account :<td th:text="${user.account}">Account</td></font></p>
+   <p align="right"><font size="6">Genre: <span th:text="${genre}"></span></font></p>
+   <p align="left"><font size="6">Description: </font></p>
+   <p align="left"><font size="5"><span th:text="${description}"></span></font></p>
+   <p align="left"><font size="8">Tickets :</font></p>
+   <p>
+   <table style="width:70%" align="left">
+    <td>Name</td>
+    <td>Price</td>
+    <td>Type</td>
+    <td>Tickets Left</td>
+    <td>Buy</td>
+    <tr th:each="ticket : ${ticketList}">
+       <td th:text="${ticket.name}">Name</td>
+        <td th:text="${ticket.price}">Price</td>
+        <td th:text="${ticket.type}">Type</td>
+        <td th:text="${ticket.ID}">Tickets Left</td>
+        <td>
+        <form action="#" data-th-action="@{'/festivals/userID/' + ${user.ID} + '/festivalID/' + ${festivalID}}" method="post">
+        	<input type="hidden" name="price" th:value="${ticket.price}"/>
+        	<input type="hidden" name="type" th:value="${ticket.type}"/>
+        	<button type="submit" name="buybtn" value="Buy">Buy</button>
+        </form>
+        </td>
+    </tr>
+    </table>
+    </p>
+   <p align="right"><font size="6">Locations:</font></p>
+   <p>
+    <table style="width:20%" align="right">
+    <tr th:each="loc : ${locationList}">
+        <td th:text="${loc.name}">Name</td>
+    </tr>
+    </table>
+    </p>
+</body>
+</html>

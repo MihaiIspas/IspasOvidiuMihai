@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+    <script src="/admin.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <style>
+        th {
+            text-align: left;
+        }
+		beta2 {
+    		position: absolute;
+    		left: 70px;
+    		top: 70px;
+    		float: left;
+    		font-size: 25px;
+		}
+		beta3 {
+    		position: absolute;
+    		left: 700px;
+    		top: 70px;
+    		float: left;
+    		font-size: 25px;
+		}
+    </style>
+</head>
+
+<body>
+
+	<p align="center"><font size="30" color="red">Administrator</font></p>
+
+	<beta2><font size="20" color="blue" align="center">Users</font>
+	<p>
+	<table style="width:100%" align="left" id="userTable">
+    <td>Name</td>
+    <td>User Name</td>
+    <td>Password</td>
+    <td>Account</td>
+    <td>Select</td>
+    <tr th:each="user : ${userList}">
+        <td th:text="${user.name}"><font size="15">Name</font></td>
+        <td th:text="${user.userName}"><font size="15">User Name</font></td>
+        <td th:text="${user.password}"><font size="15">Password</font></td>
+        <td th:text="${user.account}"><font size="15">Account</font></td>
+        <td>
+        <form action="#" data-th-action="@{/admin}" method="post">
+        	<input type="hidden" name="id" th:value="${user.ID}"/>
+        	<button type="submit" name="selectuserbtn" value="Select">Select</button>
+        </form>
+        </td>
+    </tr>
+	</table>
+	</p>
+	
+	<p>
+	<form action="#" th:action="@{/admin}" th:object="${userDTO}" method="post">
+	 	<p><input type="text" th:field="${userDTO.name}" placeholder="Name" /></p>
+    	<p><input type="text" th:field="${userDTO.userName}" placeholder="User name" /></p>
+    	<p><input type="text" th:field="${userDTO.password}" placeholder="Password" /></p>
+    	<p>
+    	<input type="submit" name="insertuserbtn" value="Insert User" />
+    	<input type="submit" name="updateuserbtn" value="Update User" />
+    	<input type="submit" name="deleteuserbtn" value="Delete User" />
+    	</p>
+	</form>
+	</p>
+	</beta2>
+	<beta3><font size="20" color="blue">Owners</font>
+	<p>
+	<table style="width:100%" align="left" id="ownerTable">
+    <td>Name</td>
+    <td>User Name</td>
+    <td>Password</td>
+    <td>Account</td>
+    <td>Select</td>
+    <tr th:each="owner : ${ownerList}" >
+        <td th:text="${owner.name}" ><font size="15">Name</font></td>
+        <td th:text="${owner.userName}" onclick="content(this)"><font size="15">User Name</font></td>
+        <td th:text="${owner.password}" ><font size="15">Password</font></td>
+        <td th:text="${owner.account}" ><font size="15">Account</font></td>
+        <td>
+        <form action="#" data-th-action="@{/admin}" method="post">
+        	<input type="hidden" name="id" th:value="${owner.ID}"/>
+        	<button type="submit" name="selectownerbtn" value="Select">Select</button>
+        </form>
+        </td>
+    </tr>
+	</table>
+	</p>
+	<p>
+	<form action="#" th:action="@{/admin}" th:object="${ownerDTO}" method="post">
+	 	<p><input type="text" th:field="${ownerDTO.name}" placeholder="Name" /></p>
+    	<p><input type="text" th:field="${ownerDTO.userName}" placeholder="User name" /></p>
+		<p><input type="text" th:field="${ownerDTO.password}" placeholder="Password" /></p>
+    	<p>
+    	<input type="submit" name="insertownerbtn" value="Insert Owner" />
+    	<input type="submit" name="updateownerbtn" value="Update Owner" />
+    	<input type="submit" name="deleteownerbtn" value="Delete Owner" />
+    	</p>
+	</form>
+	</p>
+	</beta3>
+	
+	<br/><br/>
+
+</body>
+</html>
